@@ -1,0 +1,40 @@
+#:kivy 1.9.0
+
+<SpawningScreen>:
+    angle: 0
+    timer: 15
+    shot: turret_shot
+    block: template_block
+
+    Shot:
+        id: turret_shot
+        source: 'atlas://turret/shot'
+        size: 2, 2
+        center: root.width / 2, 0
+
+    Image:
+        source: 'atlas://turret/barrel'
+        size: 32, 32
+        center: root.width / 2, 13
+        canvas.before:
+            PushMatrix
+            Rotate:
+                angle: root.angle
+                origin: root.width / 2, 0
+        canvas.after:
+            PopMatrix
+
+    Image:
+        source: 'atlas://turret/turret'
+        size: 32, 32
+        center: root.width / 2, 16
+
+    Block:
+        id: template_block
+        source: 'atlas://turret/block'
+        size:  38,16
+        center: -100, root.height - 20
+
+    Label:
+        center: 80, 20
+        text: str(round(root.timer))
